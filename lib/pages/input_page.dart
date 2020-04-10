@@ -13,6 +13,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Genders selectedGender;
+  double height = 1.80;
 
   @override
   Widget build(BuildContext context) {
@@ -21,43 +22,40 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Genders.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Genders.male
-                          ? kActiveCardColor
-                          : kInactiveCardColor,
-                      cardChild: GenderCard(
-                        icon: FontAwesomeIcons.mars,
-                        gender: 'MALE',
-                      ),
+                    colour: selectedGender == Genders.male
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: GenderCard(
+                      icon: FontAwesomeIcons.mars,
+                      gender: 'MALE',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Genders.female;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Genders.female
-                          ? kActiveCardColor
-                          : kInactiveCardColor,
-                      cardChild: GenderCard(
-                        icon: FontAwesomeIcons.venus,
-                        gender: 'FEMALE',
-                      ),
+                    colour: selectedGender == Genders.female
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: GenderCard(
+                      icon: FontAwesomeIcons.venus,
+                      gender: 'FEMALE',
                     ),
                   ),
                 ),
@@ -66,6 +64,42 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableCard(
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  SizedBox(height: 15.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        height.toStringAsFixed(2),
+                        style: kNumberTextStyle,
+                      ),
+                      SizedBox(width: 10.0),
+                      Text(
+                        'CM',
+                        style: kLabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: height,
+                    min: 1.20,
+                    max: 2.30,
+                    onChanged: (double newHeight) {
+                      setState(() {
+                        height = newHeight;
+                      });
+                    },
+                  ),
+                ],
+              ),
               colour: kActiveCardColor,
             ),
           ),
