@@ -3,7 +3,7 @@
 An application that calculate your Body Mass Index.
 
 <p>
-    <img src="https://i.imgur.com/WsF83Eu.png">
+    <img src="https://i.imgur.com/ZiwQpSh.png">
 
 ## What I learned with this project?
 
